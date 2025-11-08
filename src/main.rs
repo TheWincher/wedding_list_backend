@@ -19,14 +19,17 @@ mod invites;
 #[derive(Clone)]
 pub struct AppState {
     pub pool: Arc<PgPool>,
+    pub config: Arc<Config>,
 }
 
 #[derive(Serialize, Deserialize, Clone, FromRow)]
 struct InviteResponse {
     id: i32,
     name: String,
-    presence: bool,
+    presence: Option<bool>,
     comment: Option<String>,
+    kid: bool,
+    diner: bool,
 }
 
 #[derive(Serialize, Deserialize, Clone)]
@@ -47,6 +50,7 @@ async fn main() {
                 .await
                 .unwrap(),
         ),
+        config: Arc::new(config),
     };
     let cors_layer = CorsLayer::new()
         .allow_origin("http://localhost:5173".parse::<HeaderValue>().unwrap())
@@ -54,10 +58,11 @@ async fn main() {
         .allow_headers(Any);
     let app = Router::new()
         .route("/invites/:code", get(get_invites).patch(update_invites))
+        .route("/invites/all/:code", get(get_all_invites))
         .layer(cors_layer)
         .with_state(state);
 
-    println!("Serveur sur http://localhost:3000");
+    println!("🚀 Serveur sur http://localhost:3000");
     let listener = tokio::net::TcpListener::bind("0.0.0.0:3000").await.unwrap();
     axum::serve(listener, app).await.unwrap();
 }
@@ -67,6 +72,27 @@ async fn get_invites(
     axum::extract::Path(code): axum::extract::Path<String>,
 ) -> (StatusCode, Result<Json<Vec<InviteResponse>>, Json<String>>) {
     let invites = invites::get_invites(&state.pool, code).await;
+
+    match invites {
+        Err(e) => (StatusCode::INTERNAL_SERVER_ERROR, Err(Json(e.to_string()))),
+        Ok(invites) => {
+            if invites.is_empty() {
+                return (
+                    StatusCode::NOT_FOUND,
+                    Err(Json("No invites found".to_string())),
+                );
+            }
+
+            (StatusCode::OK, Ok(Json(invites)))
+        }
+    }
+}
+
+async fn get_all_invites(
+    State(state): State<AppState>,
+    axum::extract::Path(code): axum::extract::Path<String>,
+) -> (StatusCode, Result<Json<Vec<InviteResponse>>, Json<String>>) {
+    let invites = invites::get_all_invites(&state.pool, &state.config, code).await;
 
     match invites {
         Err(e) => (StatusCode::INTERNAL_SERVER_ERROR, Err(Json(e.to_string()))),

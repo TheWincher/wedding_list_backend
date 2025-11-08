@@ -1,0 +1,21 @@
+FROM rust:latest
+
+WORKDIR /app
+
+# Installe cargo-watch pour le hot reload
+RUN cargo install cargo-watch
+
+# Copie les fichiers de configuration
+COPY Cargo.toml Cargo.lock ./
+
+# Pré-build pour le cache
+RUN mkdir src && echo "fn main() {}" > src/main.rs && cargo build && rm -rf src
+
+# Copie le code source réel
+COPY . .
+
+# Expose le port du backend
+EXPOSE 3000
+
+# Lance en mode watch (redémarre quand le code change)
+CMD ["cargo", "watch", "-x", "run"]
