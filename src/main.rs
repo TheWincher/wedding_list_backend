@@ -49,12 +49,24 @@ async fn main() {
         .allow_methods([Method::GET, Method::PATCH])
         .allow_headers(Any);
 
+    let mut pool_connexion_try = 0;
+    let pool = loop {
+        match Pool::<Postgres>::connect(&config.database_url).await {
+            Ok(pool) => break pool,
+            Err(e) => {
+                pool_connexion_try += 1;
+                if pool_connexion_try >= 10 {
+                    panic!("❌ Could not connect to database after 10 tries: {}", e);
+                }
+
+                println!("⏳ Waiting for database... ({})", e);
+                tokio::time::sleep(std::time::Duration::from_secs(3)).await;
+            }
+        }
+    };
+
     let state = AppState {
-        pool: Arc::new(
-            Pool::<Postgres>::connect(&config.database_url)
-                .await
-                .unwrap(),
-        ),
+        pool: Arc::new(pool),
         config: Arc::new(config),
     };
 
