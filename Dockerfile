@@ -50,7 +50,7 @@ USER appuser
 EXPOSE 10000
 
 # Lancer l’application
-# CMD ["./wedding_list_backend"]
+CMD ["./wedding_list_backend"]
 
 # CMD pour Render Free : affiche debug puis lance le backend
-CMD ["./start.sh"]
+# CMD ["./start.sh"]
