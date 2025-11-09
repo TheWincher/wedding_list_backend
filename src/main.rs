@@ -41,6 +41,7 @@ struct UpdateInviteDto {
 
 #[tokio::main]
 async fn main() {
+    println!("⚙️ Starting server...");
     dotenv().ok();
     let config = Config::from_env();
     println!("⚙️ Config loaded");
