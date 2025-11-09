@@ -44,6 +44,11 @@ async fn main() {
     dotenv().ok();
     let config = Config::from_env();
 
+    let cors_layer = CorsLayer::new()
+        .allow_origin(config.frontend_url.parse::<HeaderValue>().unwrap())
+        .allow_methods([Method::GET, Method::PATCH])
+        .allow_headers(Any);
+
     let state = AppState {
         pool: Arc::new(
             Pool::<Postgres>::connect(&config.database_url)
@@ -52,10 +57,7 @@ async fn main() {
         ),
         config: Arc::new(config),
     };
-    let cors_layer = CorsLayer::new()
-        .allow_origin("http://localhost:5173".parse::<HeaderValue>().unwrap())
-        .allow_methods([Method::GET, Method::PATCH])
-        .allow_headers(Any);
+
     let app = Router::new()
         .route("/invites/:code", get(get_invites).patch(update_invites))
         .route("/invites/all/:code", get(get_all_invites))

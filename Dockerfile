@@ -1,5 +1,5 @@
 # ======== 1. Étape de build ========
-FROM rust:nightly-bullseye-slim AS builder
+FROM rust:1.91-bullseye AS builder
 
 # Installer les dépendances système nécessaires
 RUN apt-get update && apt-get install -y pkg-config libssl-dev && rm -rf /var/lib/apt/lists/*
