@@ -65,11 +65,10 @@ async fn main() {
         .with_state(state);
 
     let port = env::var("PORT").unwrap_or_else(|_| "3000".to_string());
-    let listener = tokio::net::TcpListener::bind(format!("0.0.0.0:{}", port))
-        .await
-        .unwrap();
+    let addr = format!("0.0.0.0:{}", port);
+    let listener = tokio::net::TcpListener::bind(&addr).await.unwrap();
 
-    println!("🚀 Serveur sur http://localhost:{}", port);
+    println!("🚀 Serveur running on {}", addr);
     axum::serve(listener, app).await.unwrap();
 }
 
