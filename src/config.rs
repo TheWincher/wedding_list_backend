@@ -1,4 +1,4 @@
-use std::env;
+use std::{env, io::Write};
 
 #[derive(Clone)]
 pub struct Config {
@@ -11,16 +11,19 @@ impl Config {
     pub fn from_env() -> Self {
         let database_url = env::var("DATABASE_URL").unwrap_or_else(|_| {
             eprintln!("❌ DATABASE_URL not set, exiting");
+            std::io::stdout().flush().unwrap();
             std::process::exit(1);
         });
 
         let admin_code = env::var("ADMIN_CODE").unwrap_or_else(|_| {
             eprintln!("⚠️ ADMIN_CODE not set, using default");
+            std::io::stdout().flush().unwrap();
             "admin123".to_string()
         });
 
         let frontend_url = env::var("FRONTEND_URL").unwrap_or_else(|_| {
             eprintln!("⚠️ FRONTEND_URL not set, using wildcard '*'");
+            std::io::stdout().flush().unwrap();
             "*".to_string()
         });
 

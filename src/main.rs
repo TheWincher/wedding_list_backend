@@ -1,4 +1,4 @@
-use std::{env, sync::Arc};
+use std::{env, io::Write, sync::Arc};
 
 use axum::{
     Json, Router,
@@ -42,18 +42,22 @@ struct UpdateInviteDto {
 #[tokio::main]
 async fn main() {
     println!("⚙️ Starting server...");
+    std::io::stdout().flush().unwrap();
+
     if cfg!(debug_assertions) {
         dotenv().ok();
     }
 
     let config = Config::from_env();
     println!("⚙️ Config loaded");
+    std::io::stdout().flush().unwrap();
 
     let frontend_origin = config
         .frontend_url
         .parse::<HeaderValue>()
         .unwrap_or_else(|_| {
             eprintln!("⚠️ FRONTEND_URL invalid, using '*'");
+            std::io::stdout().flush().unwrap();
             HeaderValue::from_static("*")
         });
 
@@ -71,10 +75,12 @@ async fn main() {
             Err(e) => {
                 pool_connexion_try += 1;
                 if pool_connexion_try >= 10 {
-                    panic!("❌ Could not connect to database after 10 tries: {}", e);
+                    eprintln!("❌ Could not connect to database after 10 tries: {}", e);
+                    std::io::stdout().flush().unwrap();
                 }
 
                 println!("⏳ Waiting for database... ({})", e);
+                std::io::stdout().flush().unwrap();
                 tokio::time::sleep(std::time::Duration::from_secs(3)).await;
             }
         }
