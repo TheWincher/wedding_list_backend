@@ -39,6 +39,7 @@ COPY start.sh ./start.sh
 
 # Donner les droits au nouvel utilisateur
 RUN chown appuser:appuser /app/wedding_list_backend
+RUN chown appuser:appuser ./start.sh
 RUN chmod +x /app/wedding_list_backend
 RUN chmod +x ./start.sh
 
@@ -49,7 +50,7 @@ USER appuser
 EXPOSE 10000
 
 # Lancer l’application
-CMD ["./wedding_list_backend"]
+# CMD ["./wedding_list_backend"]
 
 # CMD pour Render Free : affiche debug puis lance le backend
-# CMD ["./start.sh"]
+CMD ["./start.sh"]
