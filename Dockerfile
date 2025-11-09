@@ -40,8 +40,19 @@ RUN chown appuser:appuser /app/wedding_list_backend
 # Passer à l’utilisateur non-root
 USER appuser
 
+# Crée un petit script de démarrage pour debug
+RUN echo '#!/bin/sh\n\
+echo "=== DEBUG ==="\n\
+echo "DATABASE_URL=$DATABASE_URL"\n\
+ls -la /app\n\
+echo "=== STARTING BACKEND ==="\n\
+./weeding_list_backend' > start.sh && chmod +x start.sh
+
 # Exposer le port utilisé par ton backend (ajuste selon ton code)
 EXPOSE 3000
 
 # Lancer l’application
-CMD ["./wedding_list_backend"]
+# CMD ["./wedding_list_backend"]
+
+# CMD pour Render Free : affiche debug puis lance le backend
+CMD ["./start.sh"]
