@@ -40,14 +40,17 @@ RUN chown appuser:appuser /app/wedding_list_backend
 # Passer à l’utilisateur non-root
 USER appuser
 
-# Crée un petit script de démarrage pour debug
-RUN printf '#!/bin/sh\n\
-echo "=== DEBUG ==="\n\
-echo "DATABASE_URL=$DATABASE_URL"\n\
-ls -la /app\n\
-echo "=== STARTING BACKEND ==="\n\
-./weeding_list_backend\n' > start.sh \
-&& chmod +x start.sh
+# Créer un script de démarrage (lisible et robuste)
+RUN cat <<'EOF' > start.sh
+#!/bin/sh
+echo "=== DEBUG ==="
+echo "DATABASE_URL=$DATABASE_URL"
+ls -la /app
+echo "=== STARTING BACKEND ==="
+./weeding_list_backend
+EOF
+
+RUN chmod +x start.sh
 
 # Exposer le port utilisé par ton backend (ajuste selon ton code)
 EXPOSE 3000
