@@ -41,12 +41,13 @@ RUN chown appuser:appuser /app/wedding_list_backend
 USER appuser
 
 # Crée un petit script de démarrage pour debug
-RUN echo '#!/bin/sh\n\
+RUN printf '#!/bin/sh\n\
 echo "=== DEBUG ==="\n\
 echo "DATABASE_URL=$DATABASE_URL"\n\
 ls -la /app\n\
 echo "=== STARTING BACKEND ==="\n\
-./wedding_list_backend' > start.sh && chmod +x start.sh
+./weeding_list_backend\n' > start.sh \
+&& chmod +x start.sh
 
 # Exposer le port utilisé par ton backend (ajuste selon ton code)
 EXPOSE 3000
