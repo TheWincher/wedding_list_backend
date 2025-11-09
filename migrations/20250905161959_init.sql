@@ -69,36 +69,42 @@ INSERT INTO invites (name, kid, code) VALUES ('Jimmy Monnet', FALSE, 'I108k5Ix')
 INSERT INTO invites (name, kid, code) VALUES ('Shana Barragan', FALSE, 'wKSpl0EC');
 
 --Manu
-INSERT INTO invites (name, kid, code) VALUES ('Michaël Louchez', FALSE, '6KNkDLWk');
-INSERT INTO invites (name, kid, code) VALUES ('Eve Louchez', FALSE, '6KNkDLWk');
-INSERT INTO invites (name, kid, code) VALUES ('Alexis Louchez', FALSE, 'oMBRA7iq');
-INSERT INTO invites (name, kid, code) VALUES ('Mélissa Bertholon', FALSE, 'oMBRA7iq');
-INSERT INTO invites (name, kid, code) VALUES ('Clara Louchez', FALSE, 'oMBRA7iq');
-INSERT INTO invites (name, kid, code) VALUES ('Gérard Matuszak', FALSE, '5Gx7f0Ec');
-INSERT INTO invites (name, kid, code) VALUES ('Louise-Marie Matuszak', FALSE, '5Gx7f0Ec');
+INSERT INTO invites (name, kid, code) VALUES ('Alexis Louchez', FALSE, 'oMBRA7iq'); --M
+INSERT INTO invites (name, kid, code) VALUES ('Mélissa Bertholon', FALSE, 'oMBRA7iq'); --M
+INSERT INTO invites (name, kid, code) VALUES ('Clara Louchez', FALSE, 'oMBRA7iq'); --M
+
+INSERT INTO invites (name, kid, code) VALUES ('Michaël Louchez', FALSE, '6KNkDLWk'); --1
+INSERT INTO invites (name, kid, code) VALUES ('Eve Louchez', FALSE, '6KNkDLWk'); --1
+INSERT INTO invites (name, kid, code) VALUES ('Gérard Matuszak', FALSE, '5Gx7f0Ec'); --1
+INSERT INTO invites (name, kid, code) VALUES ('Louise-Marie Matuszak', FALSE, '5Gx7f0Ec'); --1
+INSERT INTO invites (name, kid, code) VALUES ('Virginie Matuszak', FALSE, '5uBs41ZV'); --1
+INSERT INTO invites (name, kid, code) VALUES ('Philippe Matuszak', FALSE, 'm38EtZRo'); --1
+INSERT INTO invites (name, kid, code) VALUES ('Angélique Matuszak', FALSE, 'm38EtZRo'); --1
+INSERT INTO invites (name, kid, code) VALUES ('Alice Matuszak', FALSE, 'mLTfbCmM'); --1
+INSERT INTO invites (name, kid, code) VALUES ('Bruno Papin', FALSE, 'mLTfbCmM');  --1
+
+INSERT INTO invites (name, kid, code) VALUES ('Raphaël Fotia', FALSE, 'HFF7AlA7'); --2
+INSERT INTO invites (name, kid, code) VALUES ('Léonie Lallouet', FALSE, 'HFF7AlA7'); --2
+INSERT INTO invites (name, kid, code) VALUES ('Amandine Fotia', FALSE, 'dmvnFV1s'); --2
+INSERT INTO invites (name, kid, code) VALUES ('Axel Vimeux', FALSE, 'dmvnFV1s'); --2
+INSERT INTO invites (name, kid, code) VALUES ('Sylvain Lefebvre', FALSE, '0vihmaSF'); --2 
+INSERT INTO invites (name, kid, code) VALUES ('Cyrielle Lefebvre', FALSE, 'WR13ootA'); --2
+INSERT INTO invites (name, kid, code) VALUES ('Marc Berthot', FALSE, 'WR13ootA'); --2
+INSERT INTO invites (name, kid, code) VALUES ('Evann', FALSE, 'WR13ootA') --2;
+INSERT INTO invites (name, kid, code) VALUES ('Lyam', TRUE, 'WR13ootA') --2;
+INSERT INTO invites (name, kid, code) VALUES ('Mélina Matuszak', FALSE, 'm38EtZRo') --2;
+
+INSERT INTO invites (name, kid, code) VALUES ('Dominique Louchez', FALSE, 'kYJPF1sf'); --3
+INSERT INTO invites (name, kid, code) VALUES ('Franck Louchez', FALSE, 'heq5HDaj'); --3
+INSERT INTO invites (name, kid, code) VALUES ('Sandrine Louchez', FALSE, 'heq5HDaj'); --3
+INSERT INTO invites (name, kid, code) VALUES ('Thierry Louchez', FALSE, 'xguAElFo'); --3
+INSERT INTO invites (name, kid, code) VALUES ('Patricia Louchez', FALSE, 'xguAElFo'); --3
+INSERT INTO invites (name, kid, code) VALUES ('Patrick Louchez', FALSE, 'vJbKJ31D'); --3
+INSERT INTO invites (name, kid, code) VALUES ('Véronique Louchez', FALSE, 'vJbKJ31D'); --3
+
 INSERT INTO invites (name, kid, code) VALUES ('Olivier Fotia', FALSE, 'LoEckzZH');
-INSERT INTO invites (name, kid, code) VALUES ('Virginie Matuszak', FALSE, '5uBs41ZV');
-INSERT INTO invites (name, kid, code) VALUES ('Philippe Matuszak', FALSE, 'm38EtZRo');
-INSERT INTO invites (name, kid, code) VALUES ('Angélique Matuszak', FALSE, 'm38EtZRo');
-INSERT INTO invites (name, kid, code) VALUES ('Mélina Matuszak', FALSE, 'm38EtZRo');
-INSERT INTO invites (name, kid, code) VALUES ('Raphaël Fotia', FALSE, 'HFF7AlA7');
-INSERT INTO invites (name, kid, code) VALUES ('Léonie Lallouet', FALSE, 'HFF7AlA7');
-INSERT INTO invites (name, kid, code) VALUES ('Amandine Fotia', FALSE, 'dmvnFV1s');
-INSERT INTO invites (name, kid, code) VALUES ('Axel Vimeux', FALSE, 'dmvnFV1s');
-INSERT INTO invites (name, kid, code) VALUES ('Alice Matuszak', FALSE, 'mLTfbCmM');
-INSERT INTO invites (name, kid, code) VALUES ('Bruno Papin', FALSE, 'mLTfbCmM'); 
-INSERT INTO invites (name, kid, code) VALUES ('Sylvain Lefebvre', FALSE, '0vihmaSF'); 
-INSERT INTO invites (name, kid, code) VALUES ('Cyrielle Lefebvre', FALSE, 'WR13ootA'); 
-INSERT INTO invites (name, kid, code) VALUES ('Marc Berthot', FALSE, 'WR13ootA');
-INSERT INTO invites (name, kid, code) VALUES ('Evann', FALSE, 'WR13ootA');
-INSERT INTO invites (name, kid, code) VALUES ('Lyam', TRUE, 'WR13ootA');
-INSERT INTO invites (name, kid, code) VALUES ('Dominique Louchez', FALSE, 'kYJPF1sf');
-INSERT INTO invites (name, kid, code) VALUES ('Franck Louchez', FALSE, 'heq5HDaj');
-INSERT INTO invites (name, kid, code) VALUES ('Sandrine Louchez', FALSE, 'heq5HDaj');
-INSERT INTO invites (name, kid, code) VALUES ('Thierry Louchez', FALSE, 'xguAElFo');
-INSERT INTO invites (name, kid, code) VALUES ('Patricia Louchez', FALSE, 'xguAElFo');
-INSERT INTO invites (name, kid, code) VALUES ('Patrick Louchez', FALSE, 'vJbKJ31D');
-INSERT INTO invites (name, kid, code) VALUES ('Véronique Louchez', FALSE, 'vJbKJ31D');
+
+
 
 --Apéro 
 INSERT INTO invites (name, kid, code, diner) VALUES ('Jacqueline Bon', FALSE, 'BzwzXJwb', FALSE); 
