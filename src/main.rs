@@ -42,14 +42,27 @@ struct UpdateInviteDto {
 #[tokio::main]
 async fn main() {
     println!("⚙️ Starting server...");
-    dotenv().ok();
+    if cfg!(debug_assertions) {
+        dotenv().ok();
+    }
+
     let config = Config::from_env();
     println!("⚙️ Config loaded");
 
+    let frontend_origin = config
+        .frontend_url
+        .parse::<HeaderValue>()
+        .unwrap_or_else(|_| {
+            eprintln!("⚠️ FRONTEND_URL invalid, using '*'");
+            HeaderValue::from_static("*")
+        });
+
     let cors_layer = CorsLayer::new()
-        .allow_origin(config.frontend_url.parse::<HeaderValue>().unwrap())
+        .allow_origin(frontend_origin)
         .allow_methods([Method::GET, Method::PATCH])
         .allow_headers(Any);
+
+    println!("⚙️ Cors layer configured");
 
     let mut pool_connexion_try = 0;
     let pool = loop {

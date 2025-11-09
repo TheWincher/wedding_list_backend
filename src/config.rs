@@ -9,10 +9,25 @@ pub struct Config {
 
 impl Config {
     pub fn from_env() -> Self {
+        let database_url = env::var("DATABASE_URL").unwrap_or_else(|_| {
+            eprintln!("❌ DATABASE_URL not set, exiting");
+            std::process::exit(1);
+        });
+
+        let admin_code = env::var("ADMIN_CODE").unwrap_or_else(|_| {
+            eprintln!("⚠️ ADMIN_CODE not set, using default");
+            "admin123".to_string()
+        });
+
+        let frontend_url = env::var("FRONTEND_URL").unwrap_or_else(|_| {
+            eprintln!("⚠️ FRONTEND_URL not set, using wildcard '*'");
+            "*".to_string()
+        });
+
         Self {
-            database_url: env::var("DATABASE_URL").expect("DATABASE_URL not set"),
-            admin_code: env::var("ADMIN_CODE").expect("ADMIN_CODE not set"),
-            frontend_url: env::var("FRONTEND_URL").expect("FRONTEND_URL not set"),
+            database_url: database_url,
+            admin_code: admin_code,
+            frontend_url: frontend_url,
         }
     }
 }
