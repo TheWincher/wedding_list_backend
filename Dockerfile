@@ -38,13 +38,13 @@ COPY --from=builder /app/target/release/wedding_list_backend .
 COPY start.sh ./start.sh
 
 # Donner les droits au nouvel utilisateur
-RUN chown appuser:appuser /app/wedding_list_backend
-RUN chown appuser:appuser ./start.sh
+# RUN chown appuser:appuser /app/wedding_list_backend
+# RUN chown appuser:appuser ./start.sh
 RUN chmod +x /app/wedding_list_backend
 RUN chmod +x ./start.sh
 
 # Passer à l’utilisateur non-root
-USER appuser
+# USER appuser
 
 # Exposer le port utilisé par ton backend (ajuste selon ton code)
 EXPOSE 10000
