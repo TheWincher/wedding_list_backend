@@ -24,24 +24,26 @@ FROM debian:bullseye-slim
 
 # Installer les librairies nécessaires à l'exécution du binaire Rust (openssl, etc.)
 RUN apt-get update && apt-get install -y libssl-dev ca-certificates && rm -rf /var/lib/apt/lists/*
-RUN apt-get update && apt-get install -y postgresql-client file
+# RUN apt-get update && apt-get install -y postgresql-client file
 
 
 # Créer un utilisateur non-root pour la sécurité
-RUN useradd -m appuser
+# RUN useradd -m appuser
 
 # Créer un répertoire pour l’application
 WORKDIR /app
 
 # Copier le binaire compilé depuis l’étape de build
 COPY --from=builder /app/target/release/wedding_list_backend .
-COPY start.sh ./start.sh
+# COPY start.sh ./start.sh
 
 # Donner les droits au nouvel utilisateur
 # RUN chown appuser:appuser /app/wedding_list_backend
 # RUN chown appuser:appuser ./start.sh
 RUN chmod +x /app/wedding_list_backend
-RUN chmod +x ./start.sh
+# RUN chmod +x ./start.sh
+RUN ls -l ./wedding_list_backend
+
 
 # Passer à l’utilisateur non-root
 # USER appuser
@@ -50,7 +52,7 @@ RUN chmod +x ./start.sh
 EXPOSE 10000
 
 # Lancer l’application
-# CMD ["./wedding_list_backend"]
+CMD ["./wedding_list_backend"]
 
 # CMD pour Render Free : affiche debug puis lance le backend
-CMD ["./start.sh"]
+# CMD ["./start.sh"]
