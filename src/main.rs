@@ -1,4 +1,4 @@
-use std::sync::Arc;
+use std::{env, sync::Arc};
 
 use axum::{
     Json, Router,
@@ -64,8 +64,12 @@ async fn main() {
         .layer(cors_layer)
         .with_state(state);
 
-    println!("🚀 Serveur sur http://localhost:3000");
-    let listener = tokio::net::TcpListener::bind("0.0.0.0:3000").await.unwrap();
+    let port = env::var("PORT").unwrap_or_else(|_| "3000".to_string());
+    let listener = tokio::net::TcpListener::bind(format!("0.0.0.0:{}", port))
+        .await
+        .unwrap();
+
+    println!("🚀 Serveur sur http://localhost:{}", port);
     axum::serve(listener, app).await.unwrap();
 }
 
